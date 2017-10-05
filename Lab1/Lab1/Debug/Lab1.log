@@ -1,0 +1,5 @@
+﻿  Player.cpp
+c:\users\gameuser\desktop\college\ai\lab1\lab1\player.cpp(5): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab1\lab1\player.cpp(7): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Lab1.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab1\Debug\Lab1.exe
+  Lab1.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab1\Debug\Lab1.pdb (Partial PDB)

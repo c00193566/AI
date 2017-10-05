@@ -1,0 +1,10 @@
+﻿  Main.cpp
+  Game.cpp
+c:\users\gameuser\desktop\college\ai\lab2\lab2\kinematicmovements\game.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab2\lab2\kinematicmovements\game.cpp(24): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab2\lab2\kinematicmovements\game.cpp(27): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab2\lab2\kinematicmovements\game.cpp(215): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Character.cpp
+c:\users\gameuser\desktop\college\ai\lab2\lab2\kinematicmovements\character.cpp(18): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating Code...
+sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
