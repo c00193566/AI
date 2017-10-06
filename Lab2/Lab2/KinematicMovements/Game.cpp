@@ -24,8 +24,8 @@ void Game::Init()
 
 	// Set up NPC
 	NPC_01->Init(Vector2f((MainWindow.getSize().x / 2) - 128, MainWindow.getSize().y / 2), "Ship_01");
-	NPC_01->Behaviour = MovementBehaviour::Seek;
-	NPC_01->MaxSpeed = 1.5f;
+	NPC_01->Behaviour = MovementBehaviour::Pursuit;
+	NPC_01->MaxSpeed = 2.0f;
 
 	NPC_02->Init(Vector2f((MainWindow.getSize().x / 2) + 128, MainWindow.getSize().y / 2), "Ship_02");
 	NPC_02->Behaviour = MovementBehaviour::Wander;
@@ -89,6 +89,10 @@ void Game::Update()
 	else if (NPC_01->Behaviour == MovementBehaviour::Arrive)
 	{
 		MovementTypes.Arrive(NPC_01, NPC_02, Modifiers);
+	}
+	else if (NPC_01->Behaviour == MovementBehaviour::Pursuit)
+	{
+		MovementTypes.Pursuit(NPC_01, NPC_02, Modifiers);
 	}
 
 	// Update for NPC_02
@@ -191,6 +195,31 @@ void KinematicMethods::Arrive(Character* Input, Character* Target, CalculationMe
 	Input->Attributes.Orientation = getOrientation(Input->Attributes.Orientation, Input->Attributes.Velocity, VectorModifiers);
 
 	Input->CharacterSprite.setRotation(Input->Attributes.Orientation);
+}
+
+void KinematicMethods::Pursuit(Character* Input, Character* Target, CalculationMethods Calc)
+{
+	float TimePerdiction = 0.0f;
+	float MaxTimePerdiction = 5.0f;
+
+	Vector2f Dir = Target->Attributes.Position - Input->Attributes.Position;
+	float Distance = Calc.Length(Dir);
+
+	float Speed = Calc.Length(Input->Attributes.Velocity);
+
+	if (Speed <= Distance / MaxTimePerdiction)
+	{
+		TimePerdiction = MaxTimePerdiction;
+	}
+	else
+	{
+		TimePerdiction = Distance / Speed;
+	}
+
+	Vector2f TargetPrediction = Target->Attributes.Position + Target->Attributes.Velocity * TimePerdiction;
+
+	Seek(Input, TargetPrediction, Calc);
+
 }
 
 void KinematicMethods::Wander(Character* Input, WanderComponents* Target, CalculationMethods Calc)

@@ -2,6 +2,7 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 #include <string>
+#include <cmath>
 #include "Character.h"
 
 #define WIDTH 1280

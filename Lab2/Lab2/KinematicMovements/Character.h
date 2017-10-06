@@ -20,7 +20,7 @@ struct CharacterAttributes {
 	float Rotation = 0;
 };
 
-enum class MovementBehaviour { Seek, Flee, Arrive, Wander };
+enum class MovementBehaviour { Seek, Pursuit, Flee, Arrive, Wander };
 
 class Character {
 public:

@@ -13,7 +13,7 @@ using namespace std;
 
 struct WanderComponents {
 	float LastUpdate = 0.0f;
-	float Distance = 100;
+	float Distance = 150;
 	float Radius = 50;
 	Vector2f Target = Vector2f(rand() % WIDTH, rand() % HEIGHT);
 };
@@ -21,6 +21,7 @@ struct WanderComponents {
 struct KinematicMethods {
 	void Seek(Character* Input, Character* Target, CalculationMethods VectorModifiers);
 	void Seek(Character* Input, Vector2f Target, CalculationMethods VectorModifiers);
+	void Pursuit(Character* Input, Character* Target, CalculationMethods VectorModifiers);
 	void Arrive(Character* Input, Character* Target, CalculationMethods VectorModifiers);
 	void Flee(Character* Input, Character* Target, CalculationMethods VectorModifiers);
 	void Wander(Character* Input, WanderComponents* Target, CalculationMethods VectorModifiers);
