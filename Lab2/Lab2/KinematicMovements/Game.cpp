@@ -31,6 +31,8 @@ void Game::Init()
 	NPC_02->Behaviour = MovementBehaviour::Wander;
 	NPC_02->MaxSpeed = 2.0f;
 
+	User->Init(Vector2f(0, 0), "Ship_01");
+
 }
 
 void Game::Run()
@@ -70,6 +72,7 @@ void Game::Render() {
 
 	NPC_01->Draw(MainWindow);
 	NPC_02->Draw(MainWindow);
+	User->Draw(MainWindow);
 
 	MainWindow.display();
 }

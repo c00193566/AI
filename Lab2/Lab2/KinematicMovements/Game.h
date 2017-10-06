@@ -2,7 +2,7 @@
 #include "SFML\Graphics.hpp"
 #include <iostream>
 #include <string>
-#include "Character.h"
+#include"Player.h"
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -41,6 +41,7 @@ private:
 
 	Character* NPC_01 =  new Character;
 	Character* NPC_02 = new Character;
+	Character* User = new Player;
 
 public:
 	Game();

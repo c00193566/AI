@@ -38,7 +38,7 @@ public:
 
 	Character();
 	~Character();
-	void Init(Vector2f SetUpPosition, string LoadTexture);
+	virtual void Init(Vector2f SetUpPosition, string LoadTexture);
 	void Draw(RenderWindow & MainWindow);
 	void Update();
 	void Movement();
