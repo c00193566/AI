@@ -22,23 +22,22 @@ void Game::Init()
 
 	srand(time(NULL));
 
-	// Set up NPC
-	NPC_01->Init(Vector2f((WIDTH / 2) - 128, HEIGHT / 2), "Ship_01");
-	NPC_01->Behaviour = MovementBehaviour::Pursuit;
-	NPC_01->MaxSpeed = 2.0f;
+	npcs = vector<Character*>(4);
 
-	NPC_02->Init(Vector2f((WIDTH / 2) + 128, HEIGHT/ 2), "Ship_02");
-	NPC_02->Behaviour = MovementBehaviour::Wander;
-	NPC_02->MaxSpeed = 3.0f;
-
-	NPC_03->Init(Vector2f((WIDTH - 64), HEIGHT - 64), "Ship_04");
-	NPC_03->Behaviour = MovementBehaviour::Seek;
-	NPC_03->MaxSpeed = 1.5f;
+	for (int i = 0; i < npcs.size(); i++)
+	{
+		npcs.at(i) = new Character;
+		npcs.at(i)->Init(Vector2f(rand() % WIDTH, rand() % HEIGHT), "Ship_01");
+		npcs.at(i)->Behaviour = MovementBehaviour::Seek;
+		npcs.at(i)->MaxSpeed = rand() % 6 + 1;
+	}
 
 	User->Init(Vector2f(200, 200), "Ship_03");
 	User->Behaviour = MovementBehaviour::Null;
 	User->CharacterSprite.setRotation(User->Attributes.Orientation);
 	User->MaxSpeed = 0.0f;
+
+	grouped = false;
 }
 
 void Game::Run()
@@ -71,209 +70,59 @@ void Game::EventHandler(Event event)
 	{
 		MainWindow.close();
 	}
+
+	if (event.type == Event::KeyPressed)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::G))
+		{
+			if (!grouped)
+			{
+				if (!v_formation.Setup(User, npcs))
+				{
+					cout << "Too many characters" << endl;
+				}
+				else
+				{
+					cout << "Formation set" << endl;
+					grouped = true;
+				}
+			}
+		}
+	}
 }
 
 void Game::Render() {
 	MainWindow.clear(Color::White);
 
+	//testing
+	v_formation.Draw(MainWindow);
+
+	for (int i = 0; i < npcs.size(); i++)
+	{
+		npcs.at(i)->Draw(MainWindow);
+	}
+
 	User->Draw(MainWindow);
-	NPC_01->Draw(MainWindow);
-	NPC_02->Draw(MainWindow);
-	NPC_03->Draw(MainWindow);
 
 	MainWindow.display();
 }
 
 void Game::Update()
 {
-	NPC_01->Update();
-	NPC_02->Update();
-	NPC_03->Update();
 	User->Update();
 
+	for (int i = 0; i < npcs.size(); i++)
+	{
+		npcs.at(i)->Update();
+	}
+
+
+	if (grouped)
+	{
+		v_formation.Update();
+	}
+
 	Modifiers.RandomClamp();
-
-	// Update for NPC_01
-	if (NPC_01->Behaviour == MovementBehaviour::Seek)
-	{
-		MovementTypes.Seek(NPC_01, NPC_02, Modifiers);
-	}
-	else if (NPC_01->Behaviour == MovementBehaviour::Arrive)
-	{
-		MovementTypes.Arrive(NPC_01, NPC_02, Modifiers);
-	}
-	else if (NPC_01->Behaviour == MovementBehaviour::Pursuit)
-	{
-		MovementTypes.Pursuit(NPC_01, User, Modifiers);
-	}
-
-	// Update for NPC_02
-	if (NPC_02->Behaviour == MovementBehaviour::Seek)
-	{
-		MovementTypes.Seek(NPC_02, NPC_01, Modifiers);
-	}
-	else if (NPC_02->Behaviour == MovementBehaviour::Arrive)
-	{
-		MovementTypes.Arrive(NPC_02, NPC_01, Modifiers);
-	}
-	else if (NPC_02->Behaviour == MovementBehaviour::Flee)
-	{
-		MovementTypes.Flee(NPC_02, NPC_01, Modifiers);
-	}
-	else if (NPC_02->Behaviour == MovementBehaviour::Wander)
-	{
-		MovementTypes.Wander(NPC_02, WanderVar, Modifiers);
-	}
-
-	// Update fpr NPC_03
-	if (NPC_03->Behaviour == MovementBehaviour::Seek)
-	{
-		MovementTypes.Seek(NPC_03, User, Modifiers);
-	}
-	else if (NPC_03->Behaviour == MovementBehaviour::Arrive)
-	{
-		MovementTypes.Arrive(NPC_03, User, Modifiers);
-	}
-	else if (NPC_03->Behaviour == MovementBehaviour::Pursuit)
-	{
-		MovementTypes.Pursuit(NPC_03, User, Modifiers);
-	}
-}
-
-float KinematicMethods::getOrientation(float CurrentOrientation, Vector2f Velocity, CalculationMethods VectorModifiers)
-{
-	float rotation = CurrentOrientation;
-
-	if (VectorModifiers.Length(Velocity) > 0)
-	{
-		rotation = atan2f(Velocity.x, -Velocity.y);
-
-		rotation = VectorModifiers.RadsToDegs(rotation);
-	}
-
-	return rotation;
-}
-
-void KinematicMethods::Seek(Character* Input, Character* Target, CalculationMethods VectorModifiers)
-{
-	Input->Attributes.Velocity = Target->Attributes.Position - Input->Attributes.Position;
-
-	if (VectorModifiers.Length(Input->Attributes.Velocity) < Target->Radius)
-	{
-		Input->Behaviour = MovementBehaviour::Arrive;
-	}
-	
-	Input->Attributes.Velocity = VectorModifiers.Normalize(Input->Attributes.Velocity);
-
-	Input->Attributes.Velocity *= Input->MaxSpeed;
-
-	Input->Attributes.Orientation = getOrientation(Input->Attributes.Orientation, Input->Attributes.Velocity, VectorModifiers);
-
-	Input->CharacterSprite.setRotation(Input->Attributes.Orientation);
-}
-
-void KinematicMethods::Seek(Character* Input, Vector2f Target, CalculationMethods VectorModifiers)
-{
-	Input->Attributes.Velocity = Target - Input->Attributes.Position;
-
-	Input->Attributes.Velocity = VectorModifiers.Normalize(Input->Attributes.Velocity);
-
-	Input->Attributes.Velocity *= Input->MaxSpeed;
-
-	Input->Attributes.Orientation = getOrientation(Input->Attributes.Orientation, Input->Attributes.Velocity, VectorModifiers);
-
-	Input->CharacterSprite.setRotation(Input->Attributes.Orientation);
-}
-
-void KinematicMethods::Pursuit(Character* Input, Character* Target, CalculationMethods Calc)
-{
-	float TimePerdiction = 0.0f;
-	float MaxTimePerdiction = 5.0f;
-
-	Vector2f Dir = Target->Attributes.Position - Input->Attributes.Position;
-	float Distance = Calc.Length(Dir);
-
-	float Speed = Calc.Length(Input->Attributes.Velocity);
-
-	if (Speed <= Distance / MaxTimePerdiction)
-	{
-		TimePerdiction = MaxTimePerdiction;
-	}
-	else
-	{
-		TimePerdiction = Distance / Speed;
-	}
-
-	Vector2f TargetPrediction = Target->Attributes.Position + Target->Attributes.Velocity * TimePerdiction;
-
-	Seek(Input, TargetPrediction, Calc);
-}
-
-void KinematicMethods::Flee(Character* Input, Character* Target, CalculationMethods VectorModifiers)
-{
-	Input->Attributes.Velocity = Input->Attributes.Position - Target->Attributes.Position;
-
-	Input->Attributes.Velocity = VectorModifiers.Normalize(Input->Attributes.Velocity);
-
-	Input->Attributes.Velocity *= Input->MaxSpeed;
-
-	Input->Attributes.Orientation = getOrientation(Input->Attributes.Orientation, Input->Attributes.Velocity, VectorModifiers);
-
-	Input->CharacterSprite.setRotation(Input->Attributes.Orientation);
-}
-
-void KinematicMethods::Arrive(Character* Input, Character* Target, CalculationMethods VectorModifiers)
-{
-	float TimeToTarget = 0.01f;
-
-	Input->Attributes.Velocity = Target->Attributes.Position - Input->Attributes.Position;
-
-	if (VectorModifiers.Length(Input->Attributes.Velocity) > Target->Radius)
-	{
-		Input->Behaviour = MovementBehaviour::Seek;
-	}
-
-	Input->Attributes.Velocity *= TimeToTarget;
-
-	if (VectorModifiers.Length(Input->Attributes.Velocity) > Input->MaxSpeed)
-	{
-		Input->Attributes.Velocity = VectorModifiers.Normalize(Input->Attributes.Velocity);
-
-		Input->Attributes.Velocity *= Input->MaxSpeed;
-	}
-
-	Input->Attributes.Orientation = getOrientation(Input->Attributes.Orientation, Input->Attributes.Velocity, VectorModifiers);
-
-	Input->CharacterSprite.setRotation(Input->Attributes.Orientation);
-}
-
-void KinematicMethods::Wander(Character* Input, WanderComponents* Target, CalculationMethods Calc)
-{
-	Target->LastUpdate += 1.0f / 60.0f;
-
-	if (Target->LastUpdate >= 0.35f)
-	{
-		Target->LastUpdate = 0.0f;
-	}
-
-	if (Target->LastUpdate == 0.0f || Input->Attributes.Position == Target->Target)
-	{
-		Vector2f Dir = Calc.Normalize(Input->Attributes.Velocity);
-		Vector2f Point = Dir * Target->Distance;
-		Point += Input->Attributes.Position;
-		
-		float angle = (static_cast<float>(rand() / (RAND_MAX / 361.0f))) * PI / 180;
-		angle *= Calc.RandomClamp();
-
-		float x = Target->Radius * sin(angle) + Point.x;
-		float y = Target->Radius * cos(angle) + Point.y;
-
-		Point = Vector2f(x, y);
-
-		Target->Target = Point;
-	}
-
-	Seek(Input, Target->Target, Calc);
 }
 
 float CalculationMethods::Length(Vector2f Vector)

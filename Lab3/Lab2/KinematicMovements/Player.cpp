@@ -44,8 +44,6 @@ void Player::Update() {
 void Player::SetVelocity()
 {
 	Attributes.Velocity = Vector2f(sin((Attributes.Orientation / 180 * PI)), -cos((Attributes.Orientation / 180 * PI)));
-	cout << CharacterSprite.getRotation() << endl;
-	cout << "DIR (" << Attributes.Velocity.x << " , " << Attributes.Velocity.y << ")" << endl;
 	Attributes.Velocity = Modifiers.Normalize(Attributes.Velocity);
 	Attributes.Velocity *= MaxSpeed;
 }
