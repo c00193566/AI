@@ -1,0 +1,5 @@
+1) The flock moves faster, Splits into one large group and one small group
+2) 
+	a)200... flock moves slower. Larger flocks occur. 
+	b)300... Program begins to run slower. 
+	c)400... Program runs extremely slowly. 

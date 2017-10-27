@@ -1,0 +1,13 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Boids.vcxproj, Swarm.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Boid.cpp
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.h(42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.h(53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.h(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(45): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(108): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(147): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(158): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(186): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\gameuser\desktop\college\ai\lab4\boids\boid.cpp(249): warning C4018: '<': signed/unsigned mismatch
+  Boids.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab4\Debug\Flock.exe
+  Boids.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab4\Debug\Flock.pdb (Partial PDB)

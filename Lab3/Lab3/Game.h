@@ -14,8 +14,8 @@ using namespace std;
 
 struct WanderComponents {
 	float LastUpdate = 0.0f;
-	float Distance = 100;
-	float Radius = 50;
+	float Distance = 600;
+	float Radius = 10;
 	Vector2f Target = Vector2f(rand() % WIDTH, rand() % HEIGHT);
 };
 
