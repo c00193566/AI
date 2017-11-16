@@ -1,11 +1,28 @@
-﻿  Game.cpp
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(100): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(114): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\college\ai\lab3\lab2\kinematicmovements\game.cpp(152): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  KinematicMovements.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab3\Lab2\Debug\KinematicMovements.exe
-  KinematicMovements.vcxproj -> C:\Users\gameuser\Desktop\College\AI\Lab3\Lab2\Debug\KinematicMovements.pdb (Partial PDB)
+﻿  Player.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\player.cpp(46): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Main.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  KinematicMethods.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\kinematicmethods.cpp(150): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(27): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(100): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(114): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\game.cpp(152): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  FormationV.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\formationv.cpp(19): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\formationv.cpp(39): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\formationv.cpp(49): warning C4018: '<': signed/unsigned mismatch
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\formationv.cpp(78): warning C4018: '<': signed/unsigned mismatch
+  Character.cpp
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jack\desktop\college\ai\ai\lab3\lab2\kinematicmovements\character.cpp(18): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating Code...
+sfml-window-d.lib(sfml-window-d-2.dll) : fatal error LNK1112: module machine type 'x64' conflicts with target machine type 'x86'

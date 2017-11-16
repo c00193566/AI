@@ -13,5 +13,6 @@ public:
 	bool Setup(vector<Character*>);
 	bool Setup(Player*, vector<Character*>);
 	void Update();
+	void PositionUpdate();
 	void Draw(RenderWindow& window);
 };
